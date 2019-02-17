@@ -81,8 +81,10 @@ export default {
   },
   data() {
     return {
-      email: "pravin.gordhan",
-      password: "pravin.gordhan",
+      email: "",
+      password: "",
+      // email: "pravin.gordhan",
+      // password: "pravin.gordhan",
       valid: false
     };
   },

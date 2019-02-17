@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7d4649dc-2dcc-4927-a783-71debef71d31/resourceGroups/WebSites/providers/Microsoft.Web/sites/inomnomui",
+    "appService.deploySubpath": "iNomNomUI\\dist"
+}

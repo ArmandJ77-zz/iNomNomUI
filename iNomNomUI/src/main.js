@@ -9,7 +9,7 @@ import APIConnector from './plugins/APIConnector'
 Vue.config.productionTip = false
 Vue.use(VueRouter);
 Vue.use(APIConnector, {
-    apiUrl: "http://localhost:54625"
+    apiUrl: "https://inomnomgarewayapi.azurewebsites.net"
 })
 
 new Vue({
