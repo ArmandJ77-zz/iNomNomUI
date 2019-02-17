@@ -1,4 +1,4 @@
-#iNomNom
+# iNomNom
 A system which enables employees to place lunch orders and view other employees in the organisation, 
 while providing a statistics dashboard for those vital stats on who is noming what for lunch. 
 
