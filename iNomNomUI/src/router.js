@@ -1,14 +1,12 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router';
 
 import siteLayoutView from './views/siteLayoutView.vue'
 import loginView from './views/loginView.vue'
 
 import EmployeeDirectoryLayout from './layouts/EmployeeDirectoryLayout.vue';
 import LunchMenuLayout from './layouts/LunchMenuLayout.vue';
-Vue.use(Router)
 
-export default new Router({
+var vueRouter = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
@@ -41,3 +39,19 @@ export default new Router({
         }
     ]
 })
+
+vueRouter.beforeEach((to, from, next) => {
+    debugger;
+    // redirect to login page if not logged in and trying to access a restricted page
+    const publicPages = ['/'];
+    const authRequired = !publicPages.includes(to.path);
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (authRequired && isLoggedIn === "false") {
+        return next('/');
+    }
+
+    next();
+})
+
+export default vueRouter

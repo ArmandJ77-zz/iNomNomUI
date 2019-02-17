@@ -26,7 +26,7 @@
             <v-list-tile-title>Lunch Menu</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile @click="logout">
           <v-list-tile-action>
             <v-icon>lock</v-icon>
           </v-list-tile-action>
@@ -62,6 +62,15 @@ export default {
   }),
   props: {
     source: String
+  },
+  methods: {
+    logout() {
+      localStorage.setItem("isLoggedIn", false);
+      localStorage.setItem("token", null);
+      localStorage.setItem("username", null);
+
+      this.$router.push("/");
+    }
   }
 };
 </script>

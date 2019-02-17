@@ -64,15 +64,45 @@ export default {
     email: { required, email },
     password: { required }
   },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("E-mail is required");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required && errors.push("Password is required");
+      return errors;
+    }
+  },
   data() {
     return {
-      email: "",
-      password: "",
+      email: "pravin.gordhan",
+      password: "pravin.gordhan",
       valid: false
     };
   },
   methods: {
-    submit() {}
+    async submit() {
+      debugger;
+      var dto = {
+        username: this.email,
+        password: this.password
+      };
+
+      var response = await this.$APIConnector.AuthService.Login(dto);
+      debugger;
+      localStorage.setItem("token", response.data.JWT);
+      localStorage.setItem("username", this.email);
+      localStorage.setItem("isLoggedIn", true);
+
+      console.log(response);
+      this.$router.push("/employeedirectory");
+    }
   }
 };
 </script>
