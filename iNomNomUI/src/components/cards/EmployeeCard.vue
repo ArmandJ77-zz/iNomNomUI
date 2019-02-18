@@ -20,9 +20,8 @@
           <h4 class="headline">{{firstName}} {{lastName}}</h4>
           <h4 class="subheading">{{position}}</h4>
           <h4 class="body-1">{{level}}</h4>
+          <v-btn color="primary" flat>View</v-btn>
         </v-flex>
-        <v-flex xs12 text-xs-center></v-flex>
-        <v-flex xs12 text-xs-center></v-flex>
       </v-layout>
     </v-container>
   </v-card>
@@ -33,7 +32,7 @@
 export default {
   data() {
     return {
-      avatarGenerator: new AvatarGenerator()
+      // avatarGenerator: new AvatarGenerator()
     };
   },
   computed: {
@@ -65,8 +64,8 @@ export default {
       required: true
     },
     gender: {
-      type: String,
-      required: true
+      type: String
+      // required: true
     }
   },
   methods: {}
