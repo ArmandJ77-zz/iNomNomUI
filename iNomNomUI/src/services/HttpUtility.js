@@ -25,7 +25,7 @@ export default class HttpUtility {
                     })
                     .catch(response => {
                         result = response
-                    });;
+                    });
                 break;
             case 'post':
                 {

@@ -7,7 +7,6 @@ export default class AuthService {
     }
 
     async Login(UserAuthenticationDto) {
-        debugger;
         return await this._httpUtil.ExecuteAsync('post', `${this.Resource}/login`, UserAuthenticationDto)
     }
 }

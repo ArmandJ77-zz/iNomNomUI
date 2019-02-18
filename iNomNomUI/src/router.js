@@ -5,6 +5,7 @@ import loginView from './views/loginView.vue'
 
 import EmployeeDirectoryLayout from './layouts/EmployeeDirectoryLayout.vue';
 import LunchMenuLayout from './layouts/LunchMenuLayout.vue';
+import DashboardLayout from './layouts/DashboardLayout.vue';
 
 var vueRouter = new VueRouter({
     mode: 'history',
@@ -34,6 +35,12 @@ var vueRouter = new VueRouter({
                     name: "LunchMenuLayout",
                     component: LunchMenuLayout
                 },
+                {
+                    path: "/dashboard",
+                    name: "DashboardLayout",
+                    component: DashboardLayout
+                },
+
             ]
 
         }
@@ -41,7 +48,6 @@ var vueRouter = new VueRouter({
 })
 
 vueRouter.beforeEach((to, from, next) => {
-    debugger;
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/'];
     const authRequired = !publicPages.includes(to.path);

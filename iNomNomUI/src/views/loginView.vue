@@ -80,16 +80,15 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
-      // email: "pravin.gordhan",
-      // password: "pravin.gordhan",
+      // username: "",
+      // password: "",
+      username: "pravin.gordhan",
+      password: "pravin.gordhan",
       valid: false
     };
   },
   methods: {
     async submit() {
-      debugger;
       var dto = {
         username: this.username,
         password: this.password
@@ -102,7 +101,6 @@ export default {
         return;
       }
 
-      debugger;
       localStorage.setItem("token", response.data.JWT);
       localStorage.setItem("username", this.username);
       localStorage.setItem("isLoggedIn", true);

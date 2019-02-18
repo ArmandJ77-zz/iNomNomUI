@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Lunch menu</h1>
+    <h1>dashboard</h1>
   </div>
 </template>
 
