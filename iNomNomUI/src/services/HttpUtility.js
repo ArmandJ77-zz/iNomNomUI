@@ -10,26 +10,55 @@ export default class HttpUtility {
 
     ///Executes a RESFUL request and returns the extracted response
     async ExecuteAsync(verb, path, payload = null) {
-        debugger;
-        var response = null;
+        var result = null;
         verb = verb.toLowerCase();
         switch (verb) {
             case 'get':
-                response = (payload === null) ? await this.HttpConnector.get(`${path}`) : await this.rHttpConnectorequester.get(`${path}`, payload);
+                (payload === null) ?
+                await this.HttpConnector.get(`${path}`).then(response => {
+                        result = response
+                    })
+                    .catch(response => {
+                        result = response
+                    }): await this.rHttpConnectorequester.get(`${path}`, payload).then(response => {
+                        result = response
+                    })
+                    .catch(response => {
+                        result = response
+                    });;
                 break;
             case 'post':
-                response = await this.HttpConnector.post(`${path}`, payload);
-                break;
+                {
+                    await this.HttpConnector.post(`${path}`, payload)
+                    .then(response => {
+                        result = response
+                    })
+                    .catch(response => {
+                        result = response
+                    });
+                    break;
+                }
+
             case 'put':
-                response = await this.HttpConnector.put(`${path}`, payload);
+                await this.HttpConnector.put(`${path}`, payload).then(response => {
+                        result = response
+                    })
+                    .catch(response => {
+                        result = response
+                    });
                 break;
             case 'delete':
-                response = await this.HttpConnector.delete(`${path}`, {
-                    params: payload
-                });
+                await this.HttpConnector.delete(`${path}`, {
+                        params: payload
+                    }).then(response => {
+                        result = response
+                    })
+                    .catch(response => {
+                        result = response
+                    });
         }
 
-        return this._ExtractedResponse(response);
+        return this._ExtractedResponse(result);
     }
 
     ///Private function to extract the response from the REST request

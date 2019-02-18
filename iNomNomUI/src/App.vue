@@ -14,3 +14,10 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus">
+.toasted-custom_error {
+  color: #FFFFFF !important;
+  font-family: Roboto !important;
+}
+</style>

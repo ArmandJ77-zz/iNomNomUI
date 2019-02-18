@@ -25,10 +25,10 @@
                 <v-text-field
                   label="Username"
                   required
-                  @input="$v.email.$touch()"
-                  @blur="$v.email.$touch()"
-                  v-model="email"
-                  :error-messages="emailErrors"
+                  @input="$v.username.$touch()"
+                  @blur="$v.username.$touch()"
+                  v-model="username"
+                  :error-messages="usernameErrors"
                 ></v-text-field>
               </v-flex>
               <v-flex>
@@ -56,20 +56,19 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
   validations: {
-    email: { required, email },
+    username: { required },
     password: { required }
   },
   computed: {
-    emailErrors() {
+    usernameErrors() {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
+      if (!this.$v.username.$dirty) return errors;
+      !this.$v.username.required && errors.push("Username is required");
       return errors;
     },
     passwordErrors() {
@@ -92,14 +91,20 @@ export default {
     async submit() {
       debugger;
       var dto = {
-        username: this.email,
+        username: this.username,
         password: this.password
       };
 
       var response = await this.$APIConnector.AuthService.Login(dto);
+
+      if (response.statusCode !== 200) {
+        this.$toasted.global.Error({ message: response.data });
+        return;
+      }
+
       debugger;
       localStorage.setItem("token", response.data.JWT);
-      localStorage.setItem("username", this.email);
+      localStorage.setItem("username", this.username);
       localStorage.setItem("isLoggedIn", true);
 
       console.log(response);
