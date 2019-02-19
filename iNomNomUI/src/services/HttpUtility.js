@@ -11,6 +11,9 @@ export default class HttpUtility {
     ///Executes a RESFUL request and returns the extracted response
     async ExecuteAsync(verb, path, payload = null) {
         var result = null;
+        debugger;
+        var token = localStorage.getItem("token");
+        this.HttpConnector.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         verb = verb.toLowerCase();
         switch (verb) {
             case 'get':

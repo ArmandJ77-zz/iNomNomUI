@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
+      <v-flex xs12></v-flex>
       <v-flex xs12>
         <employees-list></employees-list>
       </v-flex>

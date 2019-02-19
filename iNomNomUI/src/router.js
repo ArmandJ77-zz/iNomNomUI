@@ -6,6 +6,7 @@ import loginView from './views/loginView.vue'
 import EmployeeDirectoryLayout from './layouts/EmployeeDirectoryLayout.vue';
 import LunchMenuLayout from './layouts/LunchMenuLayout.vue';
 import DashboardLayout from './layouts/DashboardLayout.vue';
+import UserDetailLayout from './layouts/UserDetailLayout.vue';
 
 var vueRouter = new VueRouter({
     mode: 'history',
@@ -40,7 +41,11 @@ var vueRouter = new VueRouter({
                     name: "DashboardLayout",
                     component: DashboardLayout
                 },
-
+                {
+                    path: "/UserDetailLayout",
+                    name: "UserDetailLayout",
+                    component: UserDetailLayout
+                },
             ]
 
         }

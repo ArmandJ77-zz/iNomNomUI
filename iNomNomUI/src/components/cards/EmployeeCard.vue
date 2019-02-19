@@ -52,8 +52,7 @@ export default {
       required: true
     },
     lastName: {
-      type: String,
-      required: true
+      type: String
     },
     position: {
       type: String,

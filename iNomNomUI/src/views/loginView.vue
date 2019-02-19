@@ -89,6 +89,8 @@ export default {
   },
   methods: {
     async submit() {
+      localStorage.setItem("isLoggedIn", "false");
+      localStorage.setItem("token", "");
       var dto = {
         username: this.username,
         password: this.password

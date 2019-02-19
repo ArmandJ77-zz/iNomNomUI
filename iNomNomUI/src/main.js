@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 Vue.use(VueToasted)
 Vue.use(VueRouter);
 Vue.use(APIConnector, {
-    apiUrl: "http://localhost:54625" //"https://inomnomgarewayapi.azurewebsites.net"
+    apiUrl: "http://localhost:54625/api" //"https://inomnomgarewayapi.azurewebsites.net"
 })
 
 //To Register the toast messages

@@ -4,14 +4,17 @@
       <v-flex xs12>
         <v-text-field label="Search" solo v-model="search"></v-text-field>
       </v-flex>
-      <v-flex xs3 v-for="item in users" :key="item.user.id">
+      <v-flex xs12>
+        <progress-bar-circular :show="toggleLoader"></progress-bar-circular>
+      </v-flex>
+      <v-flex xs3 v-for="item in users" :key="item.User.Id">
         <employee-card
-          :id="item.user.id"
-          :firstName="item.user.first_name"
-          :lastName="item.user.last_name"
-          :gender="item.gender"
-          :position="(item.position != null) ? item.position.name : 'No Position found'"
-          :level="(item.position != null) ? item.position.level : 'No found level'"
+          :id="item.User.Id"
+          :firstName="item.User.FirstName"
+          :lastName="item.User.LastName"
+          :gender="item.Gender"
+          :position="(item.Position != null) ? item.Position.Name : 'No Position found'"
+          :level="(item.Position != null) ? item.Position.Level : 'No found level'"
         ></employee-card>
       </v-flex>
     </v-layout>
@@ -20,9 +23,12 @@
 
 <script>
 import EmployeeCard from "../cards/EmployeeCard";
+import progressBarCircular from "../progressBar/progressBarCircular";
+
 export default {
   components: {
-    EmployeeCard: EmployeeCard
+    EmployeeCard: EmployeeCard,
+    progressBarCircular: progressBarCircular
   },
   watch: {
     search(newValue, oldValue) {
@@ -39,6 +45,7 @@ export default {
   },
   data() {
     return {
+      toggleLoader: true,
       searched: false,
       search: "",
       users: null
@@ -49,119 +56,33 @@ export default {
     this.GetEmployeeData();
   },
   methods: {
-    GetEmployeeData() {
-      this.users = [
-        {
-          user: {
-            id: 8,
-            username: "captain",
-            email: "captain@gmail.com",
-            first_name: "Captain",
-            last_name: "America",
-            is_active: true,
-            is_staff: true
-          },
-          position: {
-            id: 1,
-            name: "Front-end Developer",
-            level: "Senior",
-            sort: 0
-          },
-          phone_number: "0824478876",
-          email: "captain@gmail.com",
-          github_user: "Captain",
-          birth_date: "1981-07-30",
-          gender: "F",
-          race: "B",
-          years_worked: 3,
-          age: 37,
-          days_to_birthday: 299
-        },
-        {
-          user: {
-            id: 53,
-            username: "dummy1",
-            email: "dum@one.co.za",
-            first_name: "Dummy",
-            last_name: "One",
-            is_active: true,
-            is_staff: true
-          },
-          position: null,
-          phone_number: null,
-          email: "dum@one.co.za",
-          github_user: null,
-          birth_date: "2018-10-04",
-          gender: null,
-          race: null,
-          years_worked: 0,
-          age: 0,
-          days_to_birthday: 0
-        },
-        {
-          user: {
-            id: 11,
-            username: "employee4",
-            email: "gary.player@gmail.com",
-            first_name: "Gary",
-            last_name: "Player",
-            is_active: true,
-            is_staff: true
-          },
-          position: {
-            id: 2,
-            name: "Back-end Developer",
-            level: "Junior",
-            sort: 0
-          },
-          phone_number: "0837788876",
-          email: "gary.player@gmail.com",
-          github_user: "Gary",
-          birth_date: "1990-08-09",
-          gender: "M",
-          race: "W",
-          years_worked: 1,
-          age: 28,
-          days_to_birthday: 309
-        },
-        {
-          user: {
-            id: 5,
-            username: "admin",
-            email: "ian@tangentsolutions.co.za",
-            first_name: "Ian",
-            last_name: "Roberts",
-            is_active: true,
-            is_staff: true
-          },
-          position: {
-            id: 1,
-            name: "Front-end Developer",
-            level: "Senior",
-            sort: 0
-          },
-          phone_number: "0875677663",
-          email: "ian@tangentsolutions.co.za",
-          github_user: "TangentSolutions",
-          birth_date: "1983-12-23",
-          gender: "M",
-          race: "W",
-          years_worked: 8,
-          age: 34,
-          days_to_birthday: 80
-        }
-      ];
+    async GetEmployeeData() {
+      this.toggleLoader = true;
+
+      var response = await this.$APIConnector.EmployeeService.GetList();
+      debugger;
+
+      if (response.statusCode === 200) {
+        this.users = response.data;
+
+        this.toggleLoader = false;
+        return;
+      }
+
+      this.$toasted.error("Could not retrieve employee data");
     },
     searchList(input) {
+      this.toggleLoader = true;
       var data = [];
       this.users.find(function(element) {
-        var fullname = `${element.user.first_name} ${element.user.last_name}`;
+        var fullname = `${element.User.FirstName}${element.User.LastName}`;
         if (fullname.toLowerCase().includes(input.toLowerCase())) {
           data.push(element);
         }
       });
 
       this.users = data;
+      this.toggleLoader = false;
     }
   }
 };
