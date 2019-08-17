@@ -1,3 +1,7 @@
+NOTICE
+======
+this project has been retired. The iNomnom project was part of an interview process and uses a 3rd party api to get data. This project is no longer being maintained and has been archived
+
 # iNomNom
 A system which enables employees to place lunch orders and view other employees in the organisation, 
 while providing a statistics dashboard for those vital stats on who is noming what for lunch. 
